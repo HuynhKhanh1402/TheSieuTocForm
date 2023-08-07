@@ -1,0 +1,41 @@
+# Không được điều chỉnh giá trị này!
+config-version: 0
+
+# Ví dụ với string-format: "&b{price}" và number-format: "#,###" ở mệnh giá 100K
+# thì sẽ được thiển thị như sau: "&b100,000"
+menh-gia:
+  string-format: "&b{price}"
+  number-format: "#,###"
+
+# Một số tuỳ chỉnh cho form nạp thẻ
+form:
+  # Title của form
+  title: "Nạp thẻ"
+
+  # Phần nội dung sẽ hiển thị ngay phía dưới title
+  header:
+    - "Nạp thẻ ủng hộ máy chủ"
+
+  # Phần nội dung sẽ hiển thị ở phía trên ô chọn loại thẻ
+  loai-the:
+    - "Vui lòng nhập loại thẻ:"
+
+  # Phẫn nội dung sẽ hiển thị ở phía trên ô chọn mệnh giá
+  menh-gia:
+    - "Vui lòng chọn mệnh giá:"
+
+  # Phần nội dung sẽ hiển thị ở phía trên ô nhập số seri
+  seri:
+    - "Vui lòng nhập số seri:"
+  
+  # Phần nội dung sẽ xuất hiên phía trên ô nhập mã thẻ
+  ma-the:
+    - "Vui lòng nhập mã thẻ:"
+
+  # Phần nội dung sẽ xuất hiện phía dưới ô nhập mã thẻ
+  footer:
+    - "&aChúc bạn một ngày tốt lành (✿◠‿◠)"
+
+messages:
+  seri-trong: "&cVui lòng nhập số seri"
+  ma-the-trong: "&cVui lòng nhập mã thẻ"
