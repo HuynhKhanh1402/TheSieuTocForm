@@ -40,6 +40,10 @@ public class NapTheForm {
     @Getter
     private final String pin;
     @Getter
+    private final boolean confirmToggleEnabled;
+    @Getter
+    private final String confirmToggleText;
+    @Getter
     private final String footer;
 
     private final List<Integer> prices =  Arrays.asList(10000, 20000, 30000, 50000, 100000, 200000, 300000, 500000, 1000000);
@@ -60,6 +64,8 @@ public class NapTheForm {
         price = formatText(section.getStringList("menh-gia"));
         seri = formatText(section.getStringList("seri"));
         pin = formatText(section.getStringList("ma-the"));
+        confirmToggleEnabled = section.getBoolean("xac-nhan.enable");
+        confirmToggleText = formatText(section.getStringList("xac-nhan.text"));
         footer = formatText(section.getStringList("footer"));
     }
 
@@ -93,6 +99,7 @@ public class NapTheForm {
                         }).collect(Collectors.toList()))
                 .input(seri)
                 .input(pin)
+                .optionalToggle(confirmToggleText, false, confirmToggleEnabled)
                 .label(footer)
                 .validResultHandler((customForm, response) -> {
                     String cardType = cardTypes.get(response.asDropdown());
@@ -109,6 +116,11 @@ public class NapTheForm {
 
                     if (pin == null || pin.isEmpty()){
                         player.sendMessage(colorize(plugin.getMessage("ma-the-trong")));
+                        return;
+                    }
+
+                    if (confirmToggleEnabled && response.hasNext() && !response.asToggle()) {
+                        player.sendMessage(colorize(plugin.getMessage("chua-xac-nhan")));
                         return;
                     }
 

@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.text.DecimalFormat;
+import java.util.Collections;
 import java.util.Objects;
 
 /**
@@ -53,12 +54,12 @@ public class ConfigFile {
 
             configuration = YamlConfiguration.loadConfiguration(file);
 
-            int defVersion = defConfiguration.getInt("version");
-            int version = configuration.getInt("version", 0);
+            int defVersion = defConfiguration.getInt("config-version");
+            int version = configuration.getInt("config-version", 0);
 
             if (defVersion > version) {
                 update(version);
-                configuration.set("version", defVersion);
+                configuration.set("config-version", defVersion);
                 save();
             }
 
@@ -90,5 +91,10 @@ public class ConfigFile {
      * @param version The current version of the configuration file.
      */
     public void update(int version) {
+        if (version == 0) {
+            configuration.set("form.xac-nhan.enable", true);
+            configuration.set("form.xac-nhan.text", Collections.singletonList("&eXác nhận bạn đã nhập đúng seri, mã thẻ và mệnh giá"));
+            configuration.set("messages.chua-xac-nhan", "&cVui lòng tick vào ô xác nhận để có thể nạp thẻ!");
+        }
     }
 }

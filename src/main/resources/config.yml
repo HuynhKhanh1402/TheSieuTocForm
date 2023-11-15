@@ -1,5 +1,5 @@
 # Không được điều chỉnh giá trị này!
-config-version: 0
+config-version: 1
 
 # Ví dụ với string-format: "&b{price}" và number-format: "#,###" ở mệnh giá 100K
 # thì sẽ được thiển thị như sau: "&b100,000"
@@ -32,6 +32,12 @@ form:
   ma-the:
     - "Vui lòng nhập mã thẻ:"
 
+  # Phần nút gạt để xác nhận đã nhập đúng thông tin thẻ
+  xac-nhan:
+    enable: true
+    text:
+      - "&eXác nhận bạn đã nhập đúng seri, mã thẻ và mệnh giá"
+
   # Phần nội dung sẽ xuất hiện phía dưới ô nhập mã thẻ
   footer:
     - "&aChúc bạn một ngày tốt lành (✿◠‿◠)"
@@ -39,3 +45,4 @@ form:
 messages:
   seri-trong: "&cVui lòng nhập số seri"
   ma-the-trong: "&cVui lòng nhập mã thẻ"
+  chua-xac-nhan: "&cVui lòng tick vào ô xác nhận để có thể nạp thẻ!"
