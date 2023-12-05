@@ -5,8 +5,12 @@ import me.khanh.thesieutocform.command.ReloadCommand;
 import me.khanh.thesieutocform.file.ConfigFile;
 import me.khanh.thesieutocform.form.NapTheForm;
 import me.khanh.thesieutocform.listener.PlayerListener;
+import net.thesieutoc.card.WebRequest;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.lang.reflect.Method;
 import java.util.Objects;
 
 /**
@@ -25,6 +29,9 @@ public final class TheSieuTocFormPlugin extends JavaPlugin {
 
         // Register reload command
         registerReloadCommand();
+
+        // Validate TheSieuToc compatible
+        validateDependencies();
 
         // Register nap the form
         napTheForm = new NapTheForm(this, configFile.getFormSection());
@@ -62,5 +69,23 @@ public final class TheSieuTocFormPlugin extends JavaPlugin {
      */
     public String getMessage(String key){
         return getConfig().getString("messages." + key);
+    }
+
+    /**
+     * Validates necessary dependencies for plugin functionality.
+     * Throws a runtime exception if dependencies are missing.
+     */
+    @SuppressWarnings("unused")
+    public void validateDependencies() {
+        Plugin plugin = getServer().getPluginManager().getPlugin("Thesieutoc");
+        if (plugin == null || Integer.parseInt(plugin.getDescription().getVersion().substring(1)) < 31) {
+            throw new RuntimeException("This plugin requires Thesieutoc plugin version #31 or later to work.");
+        }
+        try {
+            Class<?> cookiesClass = Class.forName("net.thesieutoc.card.Cookie");
+            Method method = WebRequest.class.getMethod("process", Player.class);
+        } catch (ClassNotFoundException | NoSuchMethodException e) {
+            throw new RuntimeException("Your TheSieuToc plugin version is incompatible. Please contact the author.", e);
+        }
     }
 }

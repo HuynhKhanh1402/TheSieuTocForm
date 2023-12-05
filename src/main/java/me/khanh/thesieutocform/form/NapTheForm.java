@@ -1,10 +1,10 @@
 package me.khanh.thesieutocform.form;
 
-import com.google.gson.JsonObject;
 import lombok.Getter;
 import me.khanh.thesieutocform.TheSieuTocFormPlugin;
 import me.khanh.thesieutocform.file.ConfigFile;
 import net.thesieutoc.Thesieutoc;
+import net.thesieutoc.card.Cookie;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
@@ -124,16 +124,15 @@ public class NapTheForm {
                         return;
                     }
 
-                    JsonObject json = thesieutoc.REQUESTS.getOrDefault(player.getName(), new JsonObject());
-                    json.addProperty("cardtype", cardType);
-                    json.addProperty("cardprice", prices.get(priceIndex));
-                    json.addProperty("seri", seri);
-                    json.addProperty("pin", pin);
-
+                    Cookie cookie = new Cookie();
+                    cookie.cardType(cardType);
+                    cookie.cardPrice(prices.get(priceIndex));
+                    cookie.SERIAL(seri);
+                    cookie.PIN(pin);
 
                     Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
-                        thesieutoc.REQUESTS.put(player.getName(), json);
-                        thesieutoc.WEB_REQUEST.send(player);
+                        thesieutoc.REQUESTS.put(player.getName(), cookie);
+                        thesieutoc.WEB_REQUEST.process(player);
                     });
                 })
                 .build();

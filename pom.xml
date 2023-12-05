@@ -90,9 +90,9 @@
         <dependency>
             <groupId>net.thesieutoc</groupId>
             <artifactId>TST</artifactId>
-            <version>27</version>
+            <version>31</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/libs/Thesieutoc #27.jar</systemPath>
+            <systemPath>${project.basedir}/libs/Thesieutoc #31.jar</systemPath>
         </dependency>
     </dependencies>
 </project>
