@@ -6,7 +6,7 @@
 
     <groupId>me.khanh</groupId>
     <artifactId>TheSieuTocForm</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
     <packaging>jar</packaging>
 
     <name>TheSieuTocForm</name>
@@ -92,7 +92,7 @@
             <artifactId>TST</artifactId>
             <version>31</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/libs/Thesieutoc #31.jar</systemPath>
+            <systemPath>${project.basedir}/libs/Thesieutoc.jar</systemPath>
         </dependency>
     </dependencies>
 </project>

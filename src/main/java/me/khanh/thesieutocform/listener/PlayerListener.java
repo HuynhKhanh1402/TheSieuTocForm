@@ -4,6 +4,7 @@ import lombok.Getter;
 import me.khanh.thesieutocform.TheSieuTocFormPlugin;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.geysermc.floodgate.api.FloodgateApi;
@@ -31,7 +32,7 @@ public class PlayerListener implements Listener {
      *
      * @param event The PlayerCommandPreprocessEvent.
      */
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onCommand(PlayerCommandPreprocessEvent event){
         Player player = event.getPlayer();
         String command = event.getMessage().substring(1);

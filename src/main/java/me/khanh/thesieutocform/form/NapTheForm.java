@@ -4,7 +4,8 @@ import lombok.Getter;
 import me.khanh.thesieutocform.TheSieuTocFormPlugin;
 import me.khanh.thesieutocform.file.ConfigFile;
 import net.thesieutoc.Thesieutoc;
-import net.thesieutoc.card.Cookie;
+import net.thesieutoc.api.Card;
+import net.thesieutoc.api.ThesieutocAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
@@ -124,16 +125,9 @@ public class NapTheForm {
                         return;
                     }
 
-                    Cookie cookie = new Cookie();
-                    cookie.cardType(cardType);
-                    cookie.cardPrice(prices.get(priceIndex));
-                    cookie.SERIAL(seri);
-                    cookie.PIN(pin);
+                    Card card = new Card(player, cardType, prices.get(priceIndex), seri, pin);
 
-                    Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
-                        thesieutoc.REQUESTS.put(player.getName(), cookie);
-                        thesieutoc.WEB_REQUEST.process(player);
-                    });
+                    Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> ThesieutocAPI.processCard(player, card));
                 })
                 .build();
 
